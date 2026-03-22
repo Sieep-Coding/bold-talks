@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOLD Conversations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5efe0;
+    --parchment-dark: #e8dfc9;
+    --ink: #1c140a;
+    --ink-soft: #3d2e1a;
+    --gold: #8b6914;
+    --gold-light: #c9a84c;
+    --gold-pale: #f0e4c0;
+    --rust: #7a3c1d;
+    --cream: #faf6ec;
+    --serif: 'Playfair Display', Georgia, serif;
+    --body: 'Crimson Pro', 'Georgia', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 2px solid var(--gold);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--parchment-dark);
+    text-decoration: none;
+    font-family: var(--body);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 5rem;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(139,105,20,0.18) 0%, transparent 70%),
+      var(--cream);
+    overflow: hidden;
+  }
+
+  .hero-rule {
+    width: 100%;
+    max-width: 480px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  .hero-ornament {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin: 0.5rem 0;
+    letter-spacing: 0.25em;
+  }
+
+  .hero-overline {
+    font-family: var(--body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 9vw, 6.5rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-tagline {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 1.8rem auto 2.5rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: var(--body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    transition: background 0.25s, color 0.25s;
+  }
+
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: nudge 2.5s ease-in-out infinite;
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* SECTION SHARED */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-rule {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 1rem;
+  }
+
+  .section-label {
+    text-align: center;
+    font-family: var(--body);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  section h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ABOUT */
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .about-text p:first-child::first-letter {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.85;
+    margin-right: 0.12em;
+    color: var(--gold);
+  }
+
+  .about-quote {
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem 1.8rem;
+    background: var(--parchment);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  .about-quote cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  /* EVENTS */
+  .events-section {
+    background: var(--ink);
+    max-width: none;
+    padding: 6rem 2rem;
+  }
+
+  .events-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .events-section .section-label { color: var(--gold-light); }
+  .events-section h2 { color: var(--parchment); }
+
+  .event-card {
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.03);
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .event-card:hover {
+    border-color: var(--gold-light);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .event-date {
+    text-align: center;
+  }
+
+  .event-date .month {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .event-date .day {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--parchment);
+    line-height: 1;
+    display: block;
+  }
+
+  .event-info h3 {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--parchment);
+    margin-bottom: 0.25rem;
+  }
+
+  .event-info .event-speaker {
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .event-info .event-meta {
+    font-size: 0.85rem;
+    color: rgba(245,239,224,0.5);
+    letter-spacing: 0.06em;
+  }
+
+  .event-rsvp {
+    text-align: right;
+  }
+
+  .btn-rsvp {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-rsvp:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .event-card.past { opacity: 0.45; }
+  .event-card.past:hover { opacity: 0.65; }
+
+  /* KDL BLOG STRIP */
+  .blog-strip {
+    background: var(--gold-pale);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    max-width: none;
+  }
+
+  .blog-strip p {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .blog-strip a {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: var(--body);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .blog-strip a:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* CONTACT */
+  .contact-wrap {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .field {
+    margin-bottom: 1.5rem;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+  }
+
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dark);
+    border-radius: 0;
+    font-family: var(--body);
+    font-size: 1rem;
+    color: var(--ink);
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    border-color: var(--gold);
+  }
+
+  .field textarea { min-height: 130px; resize: vertical; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--ink);
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+    font-family: var(--body);
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-submit:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  .form-note {
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 2px solid var(--gold);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: rgba(245,239,224,0.4);
+    font-size: 0.85rem;
+    font-family: var(--body);
+    letter-spacing: 0.06em;
+  }
+
+  footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+  }
+
+  /* FADE IN ON SCROLL */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 680px) {
+    .about-body { grid-template-columns: 1fr; }
+    .event-card { grid-template-columns: 70px 1fr; }
+    .event-rsvp { grid-column: 1 / -1; text-align: left; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { flex-direction: column; gap: 0.75rem; }
+    .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">BOLD Conversations</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#blog">Writing</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="editorial-design.html">Design #2</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-overline">Grand Rapids, Michigan</p>
+  <div class="hero-ornament">✦</div>
+  <div class="hero-rule"></div>
+  <h1>BOLD<br><em>Conversations</em></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-ornament">✦</div>
+  <p class="hero-tagline">The Ancient Art of Conversation — Reimagined.</p>
+  <a href="#events" class="hero-cta">View Upcoming Events</a>
+  <span class="hero-scroll-hint">↓ &nbsp; scroll</span>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="fade-in">
+  <div class="section-rule"></div>
+  <p class="section-label">What We Do</p>
+  <h2>An Evening of Ideas &amp; Dialogue</h2>
+  <div class="about-body">
+    <div class="about-text">
+      <p>BOLD Conversations brings together curious minds for evenings of genuine discourse. Small, curated gatherings — not panels, not lectures — where ideas meet good company.</p>
+      <p>We host authors, thinkers, and guests who have something worth saying, in settings where real conversation can happen. No slides. No agenda. Just dialogue.</p>
+    </div>
+    <blockquote class="about-quote">
+      "The goal is not debate, but the kind of conversation that changes how you see something — and sends you home thinking."
+      <cite>— Ryan Stambaugh, Founder</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<div class="events-section" id="events">
+  <div class="events-inner fade-in">
+    <div class="section-rule" style="background: var(--gold-light);"></div>
+    <p class="section-label">Upcoming</p>
+    <h2>Events</h2>
+
+    <div class="event-card">
+      <div class="event-date">
+        <span class="month">May</span>
+        <span class="day">20</span>
+      </div>
+      <div class="event-info">
+        <h3>An Author in Conversation</h3>
+        <p class="event-speaker">John Pinheiro — <em>The Christian Roots of American Liberty</em></p>
+        <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, Downtown Grand Rapids</p>
+      </div>
+      <div class="event-rsvp">
+        <a href="mailto:ryan.stambaugh@gmail.com?subject=RSVP – May 20" class="btn-rsvp">RSVP</a>
+      </div>
+    </div>
+
+    <div class="event-card past">
+      <div class="event-date">
+        <span class="month">Mar</span>
+        <span class="day">8</span>
+      </div>
+      <div class="event-info">
+        <h3>BOLD Talks — Founders Edition</h3>
+        <p class="event-speaker">Invite-only gathering</p>
+        <p class="event-meta">BOLD Cigar Bar &amp; Lounge &nbsp;·&nbsp; Past Event</p>
+      </div>
+      <div class="event-rsvp">
+        <span style="font-size:0.8rem; color:rgba(201,168,76,0.5); letter-spacing:0.1em; text-transform:uppercase;">Concluded</span>
+      </div>
+    </div>
+
+    <p style="text-align:center; color:rgba(245,239,224,0.35); font-size:0.9rem; margin-top:2rem; font-style:italic;">Seating is limited and by invitation or RSVP. Events are kept intentionally small.</p>
+  </div>
+</div>
+
+<!-- KDL BLOG STRIP -->
+<div class="blog-strip" id="blog">
+  <p>Read the story behind BOLD Conversations in Kent District Library's community blog.</p>
+  <a href="#" target="_blank">Read the KDL Feature →</a>
+</div>
+
+<!-- RSVP / CONTACT -->
+<section id="rsvp" class="fade-in">
+  <div class="section-rule"></div>
+  <p class="section-label">Get in Touch</p>
+  <h2>Reserve Your Seat</h2>
+  <div class="contact-wrap">
+    <div class="form-row">
+      <div class="field">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Margaret">
+      </div>
+      <div class="field">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Fuller">
+      </div>
+    </div>
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com">
+    </div>
+    <div class="field">
+      <label for="event">Event</label>
+      <select id="event">
+        <option value="">Select an event…</option>
+        <option value="may20">May 20 — John Pinheiro</option>
+        <option value="future">Notify me of future events</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Note (optional)</label>
+      <textarea id="message" placeholder="Any questions, dietary needs, or thoughts…"></textarea>
+    </div>
+    <button class="btn-submit" onclick="handleSubmit()">Send RSVP</button>
+    <p class="form-note">Or email directly: <a href="mailto:ryan.stambaugh@gmail.com" style="color:var(--gold);">ryan.stambaugh@gmail.com</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 BOLD Conversations &nbsp;·&nbsp; Grand Rapids, Michigan</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:ryan.stambaugh@gmail.com">ryan.stambaugh@gmail.com</a></p>
+</footer>
+
+<script>
+  // Fade on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  faders.forEach(el => observer.observe(el));
+
+  // Simple form handler
+  function handleSubmit() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const event = document.getElementById('event').value;
+    if (!name || !email || !event) {
+      alert('Please fill in your name, email, and event selection.');
+      return;
+    }
+    const subject = encodeURIComponent('RSVP – BOLD Conversations');
+    const body = encodeURIComponent(`Name: ${name} ${document.getElementById('lname').value.trim()}\nEmail: ${email}\nEvent: ${document.getElementById('event').options[document.getElementById('event').selectedIndex].text}\n\n${document.getElementById('message').value}`);
+    window.location.href = `mailto:ryan.stambaugh@gmail.com?subject=${subject}&body=${body}`;
+  }
+</script>
+</body>
+</html>
