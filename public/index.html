@@ -728,7 +728,7 @@
   <p class="section-label">Get in Touch</p>
   <h2>Reserve Your Seat</h2>
   <div class="contact-wrap">
-    <form id="rsvpForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="rsvpForm" action="https://formspree.io/f/mjgprddz" method="POST">
       <div class="form-row">
         <div class="field">
           <label for="fname">First Name</label>
@@ -816,7 +816,8 @@
   faders.forEach(el => observer.observe(el));
 
   // Photo carousel
-  const photos = ['public/1.png', 'public/2.png', 'public/3.png', 'public/4.png'];
+  // Paths match the img src attributes used in the HTML thumbnails
+  const photos = ['1.png', '2.png', '3.png', '4.png'];
   let currentPhoto = 0;
 
   function openPhotoModal(idx) {
