@@ -110,17 +110,17 @@
     display: block;
   }
 
-  .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-  }
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
 
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
 
-  .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-  }
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
 
   .mobile-nav {
     display: none;
@@ -811,6 +811,7 @@
   });
 
   function closeMobileMenu() {
+    // This removes the 'X' state and the 'open' state simultaneously
     menuToggle.classList.remove('active');
     mobileNav.classList.remove('open');
   }
@@ -818,12 +819,13 @@
   // Scroll fade
   const faders = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    entries.forEach(e => { 
+      if (e.isIntersecting) e.target.classList.add('visible'); 
+    });
   }, { threshold: 0.12 });
   faders.forEach(el => observer.observe(el));
 
   // Photo carousel
-  // Paths match the img src attributes used in the HTML thumbnails
   const photos = ['1.png', '2.png', '3.png', '4.png'];
   let currentPhoto = 0;
 
@@ -860,35 +862,35 @@
       title: 'How to Disagree Without Being a Jerk',
       speaker: 'Dr. Micah Watson',
       affil: 'Calvin University',
-      desc: 'In an age of social-media pile-ons and political tribalism, Dr. Watson offered a bracing, humane account of what genuine disagreement requires — intellectual humility, charitable reading of opponents, and the courage to change one\'s mind. The evening sparked one of the most spirited post-talk discussions BOLD Talks has seen.'
+      desc: "In an age of social-media pile-ons and political tribalism, Dr. Watson offered a bracing, humane account of what genuine disagreement requires — intellectual humility, charitable reading of opponents, and the courage to change one's mind."
     },
     {
       num: 'BOLD Talk #2',
       title: 'Our Work Belongs to God',
       speaker: 'Dr. Jordan Ballor',
       affil: 'Center for Religion, Culture & Democracy',
-      desc: 'Drawing on the Reformed tradition and natural-law thinking, Dr. Ballor argued that vocation is not merely a Protestant concept but a universal human calling. Work, rightly understood, is participation in the ongoing care of creation — a theme that resonated deeply with the diverse audience of entrepreneurs, artists, and professionals in the room.'
+      desc: "Dr. Ballor argued that vocation is participation in the ongoing care of creation — a theme that resonated deeply with the entrepreneurs and professionals in the room."
     },
     {
       num: 'BOLD Talk #3',
       title: 'Xenia: The Ancient Art of Hospitality',
       speaker: 'Dr. David Noe',
       affil: 'Grand Rapids Community College',
-      desc: 'The Greeks had a word — xenia — for the sacred bond between host and stranger. Dr. Noe traced this concept from Homer\'s Odyssey through Roman hospitality codes to its echoes in contemporary life, asking what we lose when welcoming the other becomes a transaction rather than a gift.'
+      desc: "Dr. Noe traced the concept of 'xenia' from Homer's Odyssey to contemporary life, asking what we lose when welcoming others becomes a transaction."
     },
     {
       num: 'BOLD Talk #4',
       title: 'The EU and the Post-Democratic Order',
       speaker: 'Prof. Todd Huizenga',
       affil: 'Calvin University',
-      desc: 'Prof. Huizenga examined the structural tensions within the European Union — its technocratic governance, democratic deficit, and the populist backlash reshaping its member states. Far from a lecture, the evening became a lively debate about sovereignty, subsidiarity, and whether supranational institutions can ever be truly accountable.'
+      desc: "Prof. Huizenga examined structural tensions within the EU, sovereignty, and whether supranational institutions can ever be truly accountable."
     },
     {
       num: 'BOLD Talk #5',
       title: 'Why Beauty Still Matters',
       speaker: 'Prof. Chris LaPorte',
       affil: 'Aquinas College · 2010 ArtPrize Winner',
-      desc: 'A fine artist and 2010 ArtPrize winner, Prof. LaPorte made the case that beauty is not decorative but moral — that attention to form, craft, and the sensory world shapes how we see and treat one another. He brought stories from his studio and a challenge to live more attentively.'
+      desc: "Prof. LaPorte made the case that beauty is not decorative but moral — that attention to form and craft shapes how we see and treat one another."
     }
   ];
 
@@ -912,9 +914,12 @@
     if (e.target === document.getElementById('talkModal')) closeTalkModal();
   }
 
-  // Keyboard nav
+  // Keyboard navigation
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closePhotoModal(); closeTalkModal(); }
+    if (e.key === 'Escape') { 
+      closePhotoModal(); 
+      closeTalkModal(); 
+    }
     if (document.getElementById('photoModal').classList.contains('open')) {
       if (e.key === 'ArrowLeft') carouselStep(-1);
       if (e.key === 'ArrowRight') carouselStep(1);
