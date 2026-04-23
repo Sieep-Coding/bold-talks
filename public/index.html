@@ -625,13 +625,13 @@
     <h2>Events</h2>
     <div class="event-card">
       <div class="event-date">
-        <span class="month">Apr</span>
-        <span class="day">22</span>
+        <span class="month">May</span>
+        <span class="day">20</span>
       </div>
       <div class="event-info">
-        <span class="event-badge">BOLD Talk #6</span>
-        <h3>The Meaning of Place in a Rootless Age</h3>
-        <p class="event-speaker">Dr. Jeffrey Polet</p>
+        <span class="event-badge">Special Event</span>
+        <h3>An Author in Conversation</h3>
+        <p class="event-speaker">John Pinheiro — <em>The Christian Roots of American Liberty</em></p>
         <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, Downtown Grand Rapids</p>
       </div>
       <div class="event-rsvp">
@@ -640,13 +640,13 @@
     </div>
     <div class="event-card">
       <div class="event-date">
-        <span class="month">May</span>
-        <span class="day">20</span>
+        <span class="month">Jun</span>
+        <span class="day">TBD</span>
       </div>
       <div class="event-info">
-        <span class="event-badge">Special Event</span>
-        <h3>An Author in Conversation</h3>
-        <p class="event-speaker">John Pinheiro — <em>The Christian Roots of American Liberty</em></p>
+        <span class="event-badge">BOLD Talk #7</span>
+        <h3>An Evening with David Bahnsen</h3>
+        <p class="event-speaker">David Bahnsen</p>
         <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, Downtown Grand Rapids</p>
       </div>
       <div class="event-rsvp">
@@ -697,6 +697,13 @@
         <h4>Why Beauty Still Matters</h4>
         <p class="past-speaker">Prof. Chris LaPorte</p>
         <p class="past-affil">Aquinas College &nbsp;·&nbsp; 2010 ArtPrize Winner</p>
+        <span class="read-more">Read more →</span>
+      </div>
+      <div class="past-talk" onclick="openTalkModal(5)">
+        <span class="past-talk-num">BOLD Talk #6</span>
+        <h4>The Meaning of Place in a Rootless Age</h4>
+        <p class="past-speaker">Dr. Jeffrey Polet</p>
+        <p class="past-affil">Hope College</p>
         <span class="read-more">Read more →</span>
       </div>
     </div>
@@ -754,8 +761,8 @@
         <label for="event">Event</label>
         <select id="event" name="event" required>
           <option value="">Select an event…</option>
-          <option value="april22">April 22 — Dr. Jeffrey Polet (The Meaning of Place)</option>
           <option value="may20">May 20 — John Pinheiro (Special Event)</option>
+          <option value="bold7">BOLD Talk #7 — David Bahnsen</option>
           <option value="future">Notify me of future events</option>
         </select>
       </div>
@@ -812,7 +819,6 @@
   });
 
   function closeMobileMenu() {
-    // This removes the 'X' state and the 'open' state simultaneously
     menuToggle.classList.remove('active');
     mobileNav.classList.remove('open');
   }
@@ -892,6 +898,13 @@
       speaker: 'Prof. Chris LaPorte',
       affil: 'Aquinas College · 2010 ArtPrize Winner',
       desc: "Prof. LaPorte made the case that beauty is not decorative but moral — that attention to form and craft shapes how we see and treat one another."
+    },
+    {
+      num: 'BOLD Talk #6',
+      title: 'The Meaning of Place in a Rootless Age',
+      speaker: 'Dr. Jeffrey Polet',
+      affil: 'Hope College',
+      desc: "Dr. Polet explored what it means to be rooted in a particular place, community, and tradition — and what we risk losing when mobility and abstraction replace belonging."
     }
   ];
 
