@@ -731,6 +731,10 @@
           <img src="6.jpg" alt="From the room – photo 6">
           <div class="photo-slot-overlay"></div>
         </div>
+       <div class="photo-slot" onclick="openPhotoModal(5)">
+          <img src="7.jpg" alt="From the room – photo 5">
+          <div class="photo-slot-overlay"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -837,7 +841,7 @@
   faders.forEach(el => observer.observe(el));
 
   // Photo carousel
-  const photos = ['1.png', '2.png', '3.png', '4.png', '6.jpg'];
+  const photos = ['1.png', '2.png', '3.png', '4.png', '6.jpg', '7.jpg'];
   let currentPhoto = 0;
 
   function openPhotoModal(idx) {
