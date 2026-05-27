@@ -287,82 +287,128 @@
 
   .about-quote cite { display: block; font-style: normal; font-size: 0.85rem; letter-spacing: 0.1em; color: var(--gold); margin-top: 1rem; text-transform: uppercase; }
 
-  .events-section { background: var(--ink); max-width: none; padding: 6rem 2rem; }
-  .events-inner { max-width: 860px; margin: 0 auto; }
-  .events-section .section-label { color: var(--gold-light); }
-  .events-section h2 { color: var(--parchment); }
+  /* Desktop / Base Styles (Kept as you had them) */
+.events-section { background: var(--ink); max-width: none; padding: 6rem 2rem; }
+.events-inner { max-width: 860px; margin: 0 auto; }
+.events-section .section-label { color: var(--gold-light); }
+.events-section h2 { color: var(--parchment); }
 
-  .event-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--body); color: var(--ink); background: var(--gold-light); padding: 0.18rem 0.6rem; margin-bottom: 0.4rem; font-weight: 600; }
+.event-badge { display: inline-block; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--body); color: var(--ink); background: var(--gold-light); padding: 0.18rem 0.6rem; margin-bottom: 0.4rem; font-weight: 600; }
+
+.event-card {
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.event-card:hover { border-color: var(--gold-light); background: rgba(201,168,76,0.06); }
+
+.event-date { text-align: center; padding-top: 0.25rem; }
+.event-date .month { font-family: var(--body); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); display: block; }
+.event-date .day { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--parchment); line-height: 1; display: block; }
+
+.event-info h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--parchment); margin-bottom: 0.25rem; }
+.event-info .event-speaker { font-style: italic; color: var(--gold-light); font-size: 1rem; margin-bottom: 0.4rem; }
+.event-info .event-meta { font-size: 0.85rem; color: rgba(245,239,224,0.5); letter-spacing: 0.06em; margin-bottom: 0; }
+
+.event-book-note {
+  margin-top: 0.85rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.07);
+  font-size: 0.95rem;
+  color: rgba(245,239,224,0.7);
+  line-height: 1.55;
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+.event-book-note strong {
+  font-style: normal;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.event-rsvp { text-align: right; padding-top: 0.25rem; }
+
+.btn-rsvp {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-family: var(--body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-rsvp:hover { background: var(--gold); color: var(--ink); }
+
+/* ==========================================
+   Mobile Responsive Adjustments (768px & below)
+   ========================================== */
+@media screen and (max-width: 768px) {
+  .events-section {
+    padding: 4rem 1.25rem; /* Reduce large section padding on smaller screens */
+  }
 
   .event-card {
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 2rem 2.2rem;
-    margin-bottom: 1.5rem;
-    background: rgba(255,255,255,0.03);
-    display: grid;
-    grid-template-columns: 90px 1fr auto;
-    gap: 1.5rem;
-    align-items: start;
-    transition: border-color 0.2s, background 0.2s;
-    cursor: default;
+    /* Switch 3-column layout to a stacked, single-column vertical layout */
+    grid-template-columns: 1fr; 
+    gap: 1.2rem;
+    padding: 1.5rem;
   }
 
-  .event-card:hover { border-color: var(--gold-light); background: rgba(201,168,76,0.06); }
+  .event-date {
+    text-align: left; /* Align date to the left for a cleaner vertical rhythm */
+    padding-top: 0;
+  }
+  
+  .event-date .month,
+  .event-date .day {
+    display: inline-block; /* Put month and day side-by-side on mobile */
+    vertical-align: middle;
+  }
 
-  .event-date { text-align: center; padding-top: 0.25rem; }
-  .event-date .month { font-family: var(--body); font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); display: block; }
-  .event-date .day { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--parchment); line-height: 1; display: block; }
+  .event-date .day {
+    font-size: 2rem; /* scale down massive desktop numbers */
+    margin-left: 0.5rem;
+  }
 
-  .event-info h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; color: var(--parchment); margin-bottom: 0.25rem; }
-  .event-info .event-speaker { font-style: italic; color: var(--gold-light); font-size: 1rem; margin-bottom: 0.4rem; }
-  .event-info .event-meta { font-size: 0.85rem; color: rgba(245,239,224,0.5); letter-spacing: 0.06em; margin-bottom: 0; }
+  .event-info h3 {
+    font-size: 1.2rem; /* Bring down heading size slightly */
+  }
 
- .event-book-note {
-   margin-top: 0.85rem;
-   padding: 0.75rem 1rem;
-   border: 1px solid rgba(201,168,76,0.25);
-   background: rgba(201,168,76,0.07);
-   font-size: 0.95rem;
-   color: rgba(245,239,224,0.7);
-   line-height: 1.55;
-   
-   width: 100%;
-   box-sizing: border-box; 
- }
- 
- .event-book-note strong {
-   font-style: normal;
-   color: var(--gold-light);
-   font-weight: 600;
- }
- 
- @media screen and (max-width: 480px) {
-   .event-book-note {
-     padding: 0.6rem 0.85rem; /* Slightly snugger padding for smaller screens */
-     font-size: 0.88rem;       /* Prevents text from wrapping aggressively */
-     line-height: 1.45;       /* Tightens up the line height just a bit for readability */
-     margin-top: 0.75rem;     /* Slightly less top margin to save vertical space */
-   }
- }
+  .event-book-note {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-top: 1rem;
+  }
 
-  .event-rsvp { text-align: right; padding-top: 0.25rem; }
+  .event-rsvp {
+    text-align: left; /* Keep button aligned with text elements */
+    padding-top: 0.5rem;
+  }
 
   .btn-rsvp {
-    display: inline-block;
-    padding: 0.6rem 1.4rem;
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    font-family: var(--body);
-    font-size: 0.82rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-    white-space: nowrap;
+    display: block; /* Make button full width on mobile so it's easier to tap */
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
   }
-
-  .btn-rsvp:hover { background: var(--gold); color: var(--ink); }
+}
 
   .past-section { background: var(--parchment); border-top: 1px solid var(--parchment-dark); border-bottom: 1px solid var(--parchment-dark); max-width: none; padding: 6rem 2rem; position: relative; z-index: 1; }
   .past-inner { max-width: 860px; margin: 0 auto; }
