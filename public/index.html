@@ -317,21 +317,33 @@
   .event-info .event-speaker { font-style: italic; color: var(--gold-light); font-size: 1rem; margin-bottom: 0.4rem; }
   .event-info .event-meta { font-size: 0.85rem; color: rgba(245,239,224,0.5); letter-spacing: 0.06em; margin-bottom: 0; }
 
-  .event-book-note {
-    margin-top: 0.85rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(201,168,76,0.25);
-    background: rgba(201,168,76,0.07);
-    font-size: 0.95rem;
-    color: rgba(245,239,224,0.7);
-    line-height: 1.55;
-  }
-
-  .event-book-note strong {
-    font-style: normal;
-    color: var(--gold-light);
-    font-weight: 600;
-  }
+ .event-book-note {
+   margin-top: 0.85rem;
+   padding: 0.75rem 1rem;
+   border: 1px solid rgba(201,168,76,0.25);
+   background: rgba(201,168,76,0.07);
+   font-size: 0.95rem;
+   color: rgba(245,239,224,0.7);
+   line-height: 1.55;
+   
+   width: 100%;
+   box-sizing: border-box; 
+ }
+ 
+ .event-book-note strong {
+   font-style: normal;
+   color: var(--gold-light);
+   font-weight: 600;
+ }
+ 
+ @media screen and (max-width: 480px) {
+   .event-book-note {
+     padding: 0.6rem 0.85rem; /* Slightly snugger padding for smaller screens */
+     font-size: 0.88rem;       /* Prevents text from wrapping aggressively */
+     line-height: 1.45;       /* Tightens up the line height just a bit for readability */
+     margin-top: 0.75rem;     /* Slightly less top margin to save vertical space */
+   }
+ }
 
   .event-rsvp { text-align: right; padding-top: 0.25rem; }
 
