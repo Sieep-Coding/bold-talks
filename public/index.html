@@ -746,18 +746,37 @@
 
     <div class="event-card">
       <div class="event-date">
-        <span class="month">Jun</span>
-        <span class="day">22</span>
+        <span class="month">Sep</span>
+        <span class="day">16</span>
       </div>
       <div class="event-info">
-  <span class="event-badge">BOLD Talk #7</span>
-  <h3>An Evening with David Bahnsen</h3>
-  <p class="event-speaker">David Bahnsen</p>
-  <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, Downtown Grand Rapids</p>
-  <div class="event-book-note">
-    <strong>📖 Book available at the event:</strong> This is a free event. A limited number of copies of David’s latest book, <em>Full-Time: Work and the Meaning of Life</em>, will be available for purchase for $20. Quantities are limited — if you'd like one set aside, please note it in your RSVP.
-  </div>
-</div>
+        <span class="event-badge">BOLD Talk #8</span>
+        <h3>Poetry in an Age of Unmaking: Beauty, Form, and the Recovery of the Soul</h3>
+        <p class="event-speaker">James Matthew Wilson</p>
+        <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, 144 Fulton Street East, Grand Rapids</p>
+        <div class="event-book-note">
+          <strong>✦ About the talk:</strong> Poet, critic, and scholar James Matthew Wilson explores what poetry and beauty can offer in an age marked by cultural fragmentation and the loss of form.
+        </div>
+      </div>
+      <div class="event-rsvp">
+        <a href="#rsvp" class="btn-rsvp">RSVP</a>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date">
+        <span class="month">Oct</span>
+        <span class="day">19</span>
+      </div>
+      <div class="event-info">
+        <span class="event-badge">Author in Conversation #2</span>
+        <h3>Russell Kirk on America: How to Understand the Legacy of 1776</h3>
+        <p class="event-speaker">Michael Lucchese</p>
+        <p class="event-meta">7:00 PM &nbsp;·&nbsp; BOLD Cigar Bar &amp; Lounge, 144 Fulton Street East, Grand Rapids</p>
+        <div class="event-book-note">
+          <strong>✦ About the talk:</strong> Michael Lucchese discusses <em>Russell Kirk on America: How to Understand the Legacy of 1776</em>, a new collection he edited examining Kirk's understanding of the American political tradition. The evening falls on Russell Kirk's birthday, making it an especially fitting occasion to consider his life, thought, and continuing relevance.
+        </div>
+      </div>
       <div class="event-rsvp">
         <a href="#rsvp" class="btn-rsvp">RSVP</a>
       </div>
@@ -823,6 +842,13 @@
         <p class="past-affil">Acton Institute</p>
         <span class="read-more">Read more →</span>
       </div>
+      <div class="past-talk" onclick="openTalkModal(7)">
+        <span class="past-talk-num">BOLD Talk #7</span>
+        <h4>An Evening with David Bahnsen</h4>
+        <p class="past-speaker">David Bahnsen</p>
+        <p class="past-affil">BOLD Cigar Bar &amp; Lounge</p>
+        <span class="read-more">Read more →</span>
+      </div>
     </div>
 
     <div class="photo-gallery">
@@ -886,20 +912,10 @@
         <label for="event">Event</label>
         <select id="event" name="event" required onchange="handleEventChange(this.value)">
           <option value="">Select an event…</option>
-          <option value="bold7">June 22 — David Bahnsen (BOLD Talk #7)</option>
+          <option value="bold8">September 16 — James Matthew Wilson (BOLD Talk #8)</option>
+          <option value="aic2">October 19 — Michael Lucchese (Author in Conversation #2)</option>
           <option value="future">Notify me of future events</option>
         </select>
-      </div>
-
-      <!-- Book reservation — shown only for the Bahnsen event -->
-      <div class="book-field-wrap" id="bookFieldWrap">
-        <label class="field-checkbox" for="reserveBook">
-          <input type="checkbox" id="reserveBook" name="reserveBook" value="Yes, please set aside a copy of Full-Time">
-          <span class="checkbox-label">
-            <strong>📖 Reserve a copy of the book</strong>
-            Please set aside a copy of <em>Full-Time: Work and the Meaning of Life</em> for me. (Quantities are limited.)
-          </span>
-        </label>
       </div>
 
       <div class="field">
@@ -971,11 +987,8 @@
   // Show/hide book checkbox based on event selection
   function handleEventChange(val) {
     const wrap = document.getElementById('bookFieldWrap');
-    if (val === 'bold7') {
-      wrap.classList.add('visible');
-    } else {
+    if (wrap) {
       wrap.classList.remove('visible');
-      document.getElementById('reserveBook').checked = false;
     }
   }
 
@@ -1059,6 +1072,13 @@
       speaker: 'Dr. John C. Pinheiro',
       affil: 'Acton Institute',
       desc: 'Dr. Pinheiro explored the deep historical, spiritual, and philosophical foundations of liberty in the American tradition, examining how Christian thought shaped the nation’s understanding of freedom and human flourishing.'
+    },
+    {
+      num: 'BOLD Talk #7',
+      title: 'An Evening with David Bahnsen',
+      speaker: 'David Bahnsen',
+      affil: 'BOLD Cigar Bar & Lounge',
+      desc: "David Bahnsen joined us for an evening of conversation, with copies of his book, Full-Time: Work and the Meaning of Life, available for those who joined us."
     }
   ];
 
